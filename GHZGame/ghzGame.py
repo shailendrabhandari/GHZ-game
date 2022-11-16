@@ -37,23 +37,23 @@ def runExperiment():
         ghz_state(qc,q) # bring circuit in ghz_state
         if (i ==1): # ask all for x
             # team ABC 
-            if (a_x*b_x*c_x == -1): correctABC = True; # if the product of the x values = 1 -> win
+            if (a_x*b_x*c_x == 1): correctABC = True; # if the product of the x values = 1 -> win
             # team Quantum (quantum)
             xxx(qc, q)
             counts = simulate(qc, q, c, 1)
-            if ("000" in counts or "011" in counts or "101" in counts or "110" in counts): correctQuantum = True; # if the product of the x values = -1 -> win 
+            if ("000" in counts or "011" in counts or "101" in counts or "110" in counts): correctQuantum = True; # if the product of the x values = 1 -> win 
         else:
             if (i==2): # if the random number is 1 make an XYY-measurement
-                if (a_x*b_y*c_y == 1): correctABC = True;
+                if (a_x*b_y*c_y == -1): correctABC = True;
                 xyy(qc, q)
             elif (i==3): # YXY-measurement
-                if (a_y*b_x*c_y == 1): correctABC = True;
+                if (a_y*b_x*c_y == -1): correctABC = True;
                 yxy(qc, q)
             elif (i==4): # YYX-measurement
-                if (a_y*b_y*c_x == 1): correctABC = True;
+                if (a_y*b_y*c_x == -1): correctABC = True;
                 yyx(qc, q)
             counts = simulate(qc, q, c, 1)
-            if ("001" in counts or "010" in counts or "100" in counts or "111" in counts): correctQuantum = True; # if product = 1 -> win
+            if ("001" in counts or "010" in counts or "100" in counts or "111" in counts): correctQuantum = True; # if product = -1 -> win
         print ("Round ", i, ", Question ", i)
         if (correctQuantum == True and correctABC != True): print ("Team ABC is wrong, Team Quantum was right"); 
         elif (correctQuantum != True and correctABC == True): print ("Team ABC was right, Team Quantum was wrong");
@@ -91,7 +91,7 @@ def yyx(qc, q):
     return qc
 
 def simulate(qc, q, c, s):
-    backend = BasicAer.get_backend('qasm_simulator') # define the backend
+    backend = BasicAer.get_backend('qasm_simulator') # define the backend for simulation
     qc.measure(q,c) 
     job = execute(qc, backend, shots=s) # run the job simulation
     result = job.result() # grab the result
@@ -107,7 +107,7 @@ def randomQuestion():
     if (Q == 4): print("y, x, y");
     return Q;
 
-def correctAnswer(Q): # prints out the 
+def correctAnswer(Q): # prints out the appropriate list of gates per questions
     print ("Copy the following code in the cell above:\n\n")
     if (Q==1):
         print ("qc.h(q[0])\nqc.h(q[1])\nqc.h(q[2])")
@@ -119,8 +119,8 @@ def correctAnswer(Q): # prints out the
         print ("qc.sdg(q[0])\nqc.h(q[0])\nqc.h(q[1])\nqc.sdg(q[2])\nqc.h(q[2])")
 
 
-def circuitCheck(qc,q,c,Q):
-    counts = simulate(qc, q, c, 10000)
+def circuitCheck(qc,q,c,Q): ##there are 8 possible combination and the game can be played with either of 4 best ways to win
+    counts = simulate(qc, q, c, 10000) # number of counts for the simulations/shots=10000
     if (Q==2): 
         if (("000" in counts or "011" in counts or "101" in counts or "110" in counts) and ("001" not in counts and "010" not in counts and "100" not in counts and "111" not in counts)):
             print ("Perfect! Team ABC won!")
@@ -134,7 +134,7 @@ def quiz():
     print ("(a) All 8 possible states equally mixed (|000>, |001>, |010>, ..., |110>, |111>)\n(b) A random distribution across all 8 states (|000>, |001>, |010>, ..., |110>, |111>)\n(c) Measurement result in 50% is state |000> and in 50% is state |100>\n(d) Measurement result in 50% is state |000> and in 50% is state |111>")
     answer = input()
     if answer == "d" or answer == "D":
-        print ("Your answer was correct!")
+        print ("Your answer is correct!")
     else: 
         print ("No, try again!")
   
