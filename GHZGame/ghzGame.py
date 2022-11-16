@@ -1,8 +1,11 @@
+
+##Shailendra Bhandari November 15 2022.
+
 from qiskit import ClassicalRegister, QuantumRegister, QuantumCircuit
 from qiskit import execute, BasicAer
 from random import randint
 
-#ColorX shape y
+
 
 def Alice(Alices_x, Alices_y): global a_x; global a_y; a_x = Alices_x; a_y = Alices_y;
 def Bob(Bobs_x, Bobs_y): global b_x; global b_y; b_x = Bobs_x; b_y = Bobs_y;
