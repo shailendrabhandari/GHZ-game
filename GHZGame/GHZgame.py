@@ -55,8 +55,8 @@ def runExperiment():
             counts = simulate(qc, q, c, 1)
             if ("001" in counts or "010" in counts or "100" in counts or "111" in counts): correctQuantum = True; # if product = -1 -> win
         print ("Round ", i, ", Question ", i)
-        if (correctQuantum == True and correctABC != True): print ("Team ABC is wrong, Team Quantum was right"); 
-        elif (correctQuantum != True and correctABC == True): print ("Team ABC was right, Team Quantum was wrong");
+        if (correctQuantum == True and correctABC != True): print ("Team ABC is wrong, Team Quantum is right"); 
+        elif (correctQuantum != True and correctABC == True): print ("Team ABC is right, Team Quantum is wrong");
         else: print ("Both teams are right")
         i = i+1;
 
