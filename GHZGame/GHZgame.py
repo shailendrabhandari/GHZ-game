@@ -108,7 +108,7 @@ def randomQuestion():
     return Q;
 
 def correctAnswer(Q): # prints out the appropriate list of gates per questions
-    print ("Copy the following code in the cell above:\n\n")
+    print ("Copy the following code in the cell below for the measurement of above question:\n\n")
     if (Q==1):
         print ("qc.h(q[0])\nqc.h(q[1])\nqc.h(q[2])")
     if (Q==2):
