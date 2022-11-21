@@ -11,4 +11,4 @@ Project is created with:
 
 
 ## Setup
-This project uses .[Qiskit].(qiskit.org). The best way of installing qiskit is by using pip: `$ pip install qiskit`. You can even try with the latest version of Qiskit too. 
+This project uses [Qiskit](qiskit.org). The best way of installing qiskit is by using pip: `$ pip install qiskit`. You can even try with the latest version of Qiskit too. 
