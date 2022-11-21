@@ -12,3 +12,8 @@ Project is created with:
 
 ## Setup
 This project use [Qiskit](qiskit.org). The best way of installing qiskit is by using pip: `$ pip install qiskit`. You can even try with the latest version of Qiskit too. 
+
+
+## Executing  [GHZ_Game.ipynb](https://github.com/shailendrabhandari/GHZ-game/blob/main/GHZ-Game.ipynb) in IBM Quantum Lab
+
+* Open IBM quantum lab [IBM Quantum](https://quantum-computing.ibm.com/).
