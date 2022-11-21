@@ -17,3 +17,9 @@ This project use [Qiskit](qiskit.org). The best way of installing qiskit is by u
 ## Executing  [GHZ_Game.ipynb](https://github.com/shailendrabhandari/GHZ-game/blob/main/GHZ-Game.ipynb) in IBM Quantum Lab
 
 * Open IBM quantum lab [IBM Quantum](https://quantum-computing.ibm.com/).
+* Log in with the IBM account.
+* Lunch IBM quantum lab.
+* Open New file/Python 3(ipykernel)via Launcher.
+* On the first cell enter `$ !git clone https://github.com/shailendrabhandari/GHZ-game.git`.
+* Execute the cell `$ Shift_enter` and then the GHZ_Game will be cloned in your IBM Quantum lab. 
+* From the folder `$GHZ_game` click `$GHZ_Game.ipynb` and execute the cells to view and play the game. 
