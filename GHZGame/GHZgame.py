@@ -1,11 +1,13 @@
 
 ##Shailendra Bhandari November 15 2022.
 
+
+
 from qiskit import ClassicalRegister, QuantumRegister, QuantumCircuit
 from qiskit import execute, BasicAer
 from random import randint
 
-
+###Alice, Bob and Charlie are the three players of Team ABC and they will get either x or y from the referee. Therefore their variables are defined as a_x, b_x,c_x and a_y, b_y, c_y respectively.
 
 def Alice(Alices_x, Alices_y): global a_x; global a_y; a_x = Alices_x; a_y = Alices_y;
 def Bob(Bobs_x, Bobs_y): global b_x; global b_y; b_x = Bobs_x; b_y = Bobs_y;
@@ -18,6 +20,8 @@ def geta_y(): return a_y;
 def getb_y(): return b_y;
 def getc_y(): return c_y;
 
+##In order to always win the game they need to use the quantum strategy and typically a three state entangled quantum circuit. Alice, Bob and Charlie
+
 def ghz_state(qc,q):
     # create GHZ state
     qc.h(q[0])
@@ -29,19 +33,19 @@ def ghz_state(qc,q):
 def runExperiment():
     for i in range (1,5):
         correctABC = False; correctQuantum = False;
-        # create the quantum circuit with the chosen coin moves
-        q = QuantumRegister(3) # create a quantum register with one qubit
+        # create the quantum circuit \
+        q = QuantumRegister(3) #this creates a quantum register with one qubit
         # create a classical register that will hold the results of the measurement
         c = ClassicalRegister(3) 
         qc = QuantumCircuit(q, c) # creates the quantum circuit
         ghz_state(qc,q) # bring circuit in ghz_state
-        if (i ==1): # ask all for x
+        if (i ==1): # ask all for xxx
             # team ABC 
             if (a_x*b_x*c_x == 1): correctABC = True; # if the product of the x values = 1 -> win
-            # team Quantum (quantum)
+            # ask team Quantum (quantum) for xxx
             xxx(qc, q)
             counts = simulate(qc, q, c, 1)
-            if ("000" in counts or "011" in counts or "101" in counts or "110" in counts): correctQuantum = True; # if the product of the x values = 1 -> win 
+            if ("000" in counts or "011" in counts or "101" in counts or "110" in counts): correctQuantum = True; # if the product of the x values = 1 -> win for xy in different combination
         else:
             if (i==2): # if the random number is 1 make an XYY-measurement
                 if (a_x*b_y*c_y == -1): correctABC = True;
@@ -53,20 +57,20 @@ def runExperiment():
                 if (a_y*b_y*c_x == -1): correctABC = True;
                 yyx(qc, q)
             counts = simulate(qc, q, c, 1)
-            if ("001" in counts or "010" in counts or "100" in counts or "111" in counts): correctQuantum = True; # if product = -1 -> win
+            if ("001" in counts or "010" in counts or "100" in counts or "111" in counts): correctQuantum = True; # if product = -1 -> win  Because the winning condition of the game is either +1/or-1
         print ("Round ", i, ", Question ", i)
         if (correctQuantum == True and correctABC != True): print ("Team ABC is wrong, Team Quantum is right"); 
         elif (correctQuantum != True and correctABC == True): print ("Team ABC is right, Team Quantum is wrong");
         else: print ("Both teams are right")
         i = i+1;
 
-def xxx(qc, q):
+def xxx(qc, q):  #for xxx
     qc.h(q[0])
     qc.h(q[1])
     qc.h(q[2])
     return qc
 
-def xyy(qc, q):
+def xyy(qc, q):  #for xxy
     qc.h(q[0])
     qc.sdg(q[1])
     qc.h(q[1])
@@ -74,7 +78,7 @@ def xyy(qc, q):
     qc.h(q[2])
     return qc
 
-def yxy(qc, q):
+def yxy(qc, q):    #for yxy
     qc.sdg(q[0])
     qc.h(q[0])
     qc.h(q[1])
@@ -82,7 +86,7 @@ def yxy(qc, q):
     qc.h(q[2])
     return qc
 
-def yyx(qc, q):
+def yyx(qc, q):   # for yyx
     qc.sdg(q[0])
     qc.h(q[0])
     qc.h(q[1])
@@ -99,7 +103,7 @@ def simulate(qc, q, c, s):
     return counts
 
 def randomQuestion():
-    print ("The question to Team ABC is getting asked is:")
+    print ("The question to Team ABC is getting asked by the referee is:")
     Q = randint (1,4)
     if (Q == 1): print("x, x, x"); 
     if (Q == 2): print("x, y, y");
@@ -107,7 +111,7 @@ def randomQuestion():
     if (Q == 4): print("y, x, y");
     return Q;
 
-def correctAnswer(Q): # prints out the appropriate list of gates per questions
+def correctAnswer(Q): # prints out the appropriate list of gates per questions so as to generate the GHZ circuit later
     print ("Copy the following code in the cell below for the measurement of above question:\n\n")
     if (Q==1):
         print ("qc.h(q[0])\nqc.h(q[1])\nqc.h(q[2])")
@@ -130,11 +134,12 @@ def circuitCheck(qc,q,c,Q): ##there are 8 possible combination and the game can 
             print ("Perfect! Team ABC won!")
         else: print ("Hmmm... There might still be a mistake.")
             
-def quiz():
-    print ("(a) All 8 possible states equally mixed (|000>, |001>, |010>, ..., |110>, |111>)\n(b) A random distribution across all 8 states (|000>, |001>, |010>, ..., |110>, |111>)\n(c) Measurement result in 50% is state |000> and in 50% is state |100>\n(d) Measurement result in 50% is state |000> and in 50% is state |111>")
-    answer = input()
-    if answer == "d" or answer == "D":
-        print ("Your answer is correct!")
-    else: 
-        print ("No, try again!")
+#def quiz():
+#    print ("(a) All 8 possible states equally mixed (|000>, |001>, |010>, ..., |110>, |111>)\n(b) A random distribution across all 8 states (|000>, |001>, |010>, ..., |110>, |111>)\n(c) Measurement result in 50% is state |000> and in 50% is state |100>\n(d) Measurement result in 50% is state |000> and in 50% is state |111>")
+
+#    answer = input()
+#    if answer == "d" or answer == "D":
+#        print ("Your answer is correct!")
+#    else: 
+#        print ("No, try again!")
   
