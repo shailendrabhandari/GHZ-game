@@ -1,8 +1,24 @@
 
 ##Shailendra Bhandari November 15 2022.
+'''
+
+MIT License
+
+Copyright (c) 2022 Shailendra Bhandari
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.'''
 
 
 
+#import necessary libraries
 from qiskit import ClassicalRegister, QuantumRegister, QuantumCircuit
 from qiskit import execute, BasicAer
 from random import randint
@@ -33,19 +49,19 @@ def ghz_state(qc,q):
 def runExperiment():
     for i in range (1,5):
         correctABC = False; correctQuantum = False;
-        # create the quantum circuit \
         q = QuantumRegister(3) #this creates a quantum register with one qubit
         # create a classical register that will hold the results of the measurement
         c = ClassicalRegister(3) 
         qc = QuantumCircuit(q, c) # creates the quantum circuit
-        ghz_state(qc,q) # bring circuit in ghz_state
+        ghz_state(qc,q) # bring circuit in ghz_state (entangled)
         if (i ==1): # ask all for xxx
             # team ABC 
             if (a_x*b_x*c_x == 1): correctABC = True; # if the product of the x values = 1 -> win
-            # ask team Quantum (quantum) for xxx
+            # ask team Quantum (for all) for xxx
             xxx(qc, q)
             counts = simulate(qc, q, c, 1)
-            if ("000" in counts or "011" in counts or "101" in counts or "110" in counts): correctQuantum = True; # if the product of the x values = 1 -> win for xy in different combination
+            if ("000" in counts or "011" in counts or "101" in counts or "110" in counts): correctQuantum = True; # if the product of the x values = 1 -> win
+## for xy in different combination
         else:
             if (i==2): # if the random number is 1 make an XYY-measurement
                 if (a_x*b_y*c_y == -1): correctABC = True;
@@ -57,6 +73,7 @@ def runExperiment():
                 if (a_y*b_y*c_x == -1): correctABC = True;
                 yyx(qc, q)
             counts = simulate(qc, q, c, 1)
+
             if ("001" in counts or "010" in counts or "100" in counts or "111" in counts): correctQuantum = True; # if product = -1 -> win  Because the winning condition of the game is either +1/or-1
         print ("Round ", i, ", Question ", i)
         if (correctQuantum == True and correctABC != True): print ("Team ABC is wrong, Team Quantum is right"); 
@@ -125,21 +142,12 @@ def correctAnswer(Q): # prints out the appropriate list of gates per questions s
 
 def circuitCheck(qc,q,c,Q): ##there are 8 possible combination and the game can be played with either of 4 best ways to win
     counts = simulate(qc, q, c, 10000) # number of counts for the simulations/shots=10000
-    if (Q==2): 
+    if (Q==1): 
         if (("000" in counts or "011" in counts or "101" in counts or "110" in counts) and ("001" not in counts and "010" not in counts and "100" not in counts and "111" not in counts)):
-            print ("Perfect! Team ABC won!")
-        else: print ("Hmmm... There might still be a mistake.")
+            print ("Perfect! Team ABC won!☺️")
+        else: print ("There might still be a mistake.🤔️")
     else:
         if (("001" in counts or "010" in counts or "100" in counts or "111" in counts) and ("000" not in counts and "011" not in counts and "101" not in counts and "110" not in counts)):
-            print ("Perfect! Team ABC won!")
-        else: print ("Hmmm... There might still be a mistake.")
+            print ("Perfect! Team ABC won!😊️")
+        else: print ("There might still be a mistake.🤔️")
             
-#def quiz():
-#    print ("(a) All 8 possible states equally mixed (|000>, |001>, |010>, ..., |110>, |111>)\n(b) A random distribution across all 8 states (|000>, |001>, |010>, ..., |110>, |111>)\n(c) Measurement result in 50% is state |000> and in 50% is state |100>\n(d) Measurement result in 50% is state |000> and in 50% is state |111>")
-
-#    answer = input()
-#    if answer == "d" or answer == "D":
-#        print ("Your answer is correct!")
-#    else: 
-#        print ("No, try again!")
-  
