@@ -60,7 +60,7 @@ def runExperiment():
             # ask team Quantum (for all) for xxx
             xxx(qc, q)
             counts = simulate(qc, q, c, 1)
-            if ("000" in counts or "011" in counts or "101" in counts or "110" in counts): correctQuantum = True; # if the product of the x values = 1 -> win
+            if ("000" in counts or "011" in counts or "101" in counts or "110" in counts): correctQuantum = True; # if the product of the x values = -1 -> win
 ## for xy in different combination
         else:
             if (i==2): # if the random number is 1 make an XYY-measurement
